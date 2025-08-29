@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head><!--3-->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--7-->
+
+    <title>UMBRA Game - Portail de Connexion</title>
+
+    <link rel="icon" href="../assets/img/logo.png" type="image/png">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    </head>
+
+<body>
+
+
+
+    <div class="scanlines"></div>
+
+
+
+    <div class="container login-container">
+
+        <div class="login-box">
+
+            <img src="../assets/img/cadenas.png" alt="Lock Icon" class="lock-icon"><!--3-->
+
+            <h1>
+
+                <span class="clue" data-letter="P">P</span>ortail d'Accès Sé<span class="clue" data-letter="C">c</span>urisé
+                <br> UMBRA
+
+            </h1>
+
+            <!--1-->
+
+            <p class="description">
+
+                Authentification <span class="clue" data-letter="R">r</span>equise p<span class="clue" data-letter="O">o</span>ur é<span class="clue" data-letter="T">t</span>ab<span class="clue" data-letter="L">l</span>ir
+                <br> la c<span class="clue" data-letter="O">o</span>nnexion au réseau interne.
+
+            </p>
+
+            
+
+            <form id="login-form">
+
+                <input type="password" id="password" placeholder="Entrez le c_de..." autofocus>
+
+                <button type="submit">ACCÉDER</button>
+
+            </form>
+
+            <p id="error-message" class="error pass"></p>
+
+            <p class="hint">Indice : Des fragments du mot-clé semblent être différents... Quant aux 4 chiffres, un bon technicien regarde toujours les journaux système.</p>
+            <p id="hint-message1" style="display:none; color: #ffa500;">
+                Indice N°1 : Les lettres formant le mot-clé sont mise en valeur de différentes manière.
+            </p>
+            <p id="hint-message2" style="display:none; color: #ffa500;">
+                Indice N°2 : Les journaux système sont conséquents, mais avez vous bien regardé la ligne 4 ?
+            </p>
+            <p id="hint-message3" style="display:none; color: #ffa500;">
+                Indice N°3 : Le mot-clé commence par "pr" et se termine par "l".
+            </p>
+            <p class="hint">Attention : Les indices trouvés et donnés ne sont pas forcément dans l'ordre.</p>
+        </div>
+    </div>
+
+    <script src="js/portail.js"></script>
+    <script src="js/timer.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,794 @@
+/* --- Variables et Style Global --- */
+
+:root {
+
+    --bg-color: #0a0a0a;
+
+    --text-color: #e0e0e0;
+
+    --dark-grey: #1a1a1a;
+
+    --primary-green: #00ff7f; /* Conservé pour l'effet glitch du Héro */
+
+    
+
+    /* Couleurs pour chaque jeu */
+
+    --game-1-color: #0AE669; /* Vert */
+
+    --game-2-color: #00e1ff; /* Cyan */
+
+    --game-3-color: #ffb700; /* Ambre */
+
+    
+
+    /* Polices */
+
+    --font-mono: 'Roboto Mono', monospace;
+
+    --font-sans: 'Lato', sans-serif;
+
+}
+
+
+
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+
+body {
+
+    background-color: var(--bg-color);
+
+    color: var(--text-color);
+
+    font-family: var(--font-sans);
+
+    line-height: 1.7;
+
+}
+
+
+
+/* --- Header & Navigation --- */
+
+.main-header {
+
+    background: rgba(10, 10, 10, 0.8);
+
+    backdrop-filter: blur(10px);
+
+    border-bottom: 1px solid #222;
+
+    padding: 1rem 5%;
+
+    position: fixed;
+
+    width: 100%;
+
+    z-index: 100;
+
+}
+
+
+
+.main-nav {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+
+.nav-logo {
+
+    font-family: var(--font-mono);
+
+    font-weight: 700;
+
+    font-size: 1.5rem;
+
+    color: var(--primary-green);
+
+}
+
+
+
+.nav-button {
+
+    font-family: var(--font-mono);
+
+    text-decoration: none;
+
+    color: var(--primary-green);
+
+    border: 1px solid var(--primary-green);
+
+    padding: 0.5rem 1rem;
+
+    border-radius: 4px;
+
+    transition: background-color 0.3s, color 0.3s;
+
+}
+
+
+
+.nav-button:hover {
+
+    background-color: var(--primary-green);
+
+    color: var(--bg-color);
+
+}
+
+
+
+/* --- Section Héro --- */
+
+.hero-section {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 0 2rem;
+
+}
+
+
+
+.hero-title {
+
+    font-family: var(--font-mono);
+
+    font-size: clamp(2.5rem, 8vw, 5rem);
+
+    color: var(--text-color);
+
+    text-transform: uppercase;
+
+    position: relative;
+
+    text-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+
+}
+
+
+
+/* Effet Glitch pour le titre */
+
+.hero-title::before, .hero-title::after {
+
+    content: attr(data-text);
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: var(--bg-color);
+
+    overflow: hidden;
+
+}
+
+.hero-title::before {
+
+    left: 2px;
+
+    text-shadow: -2px 0 var(--primary-green);
+
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+
+}
+
+.hero-title::after {
+
+    left: -2px;
+
+    text-shadow: -2px 0 #ff00c1, 2px 2px var(--primary-green);
+
+    animation: glitch-anim-2 2s infinite linear alternate-reverse;
+
+}
+
+@keyframes glitch-anim-1 { 0% { clip-path: inset(5% 0 90% 0); } 100% { clip-path: inset(70% 0 10% 0); } }
+
+@keyframes glitch-anim-2 { 0% { clip-path: inset(80% 0 5% 0); } 100% { clip-path: inset(5% 0 80% 0); } }
+
+
+
+.hero-subtitle {
+
+    font-size: 1.2rem;
+
+    max-width: 600px;
+
+    margin: 1.5rem auto 2.5rem;
+
+    color: #aaa;
+
+}
+
+
+
+.cta-button {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--bg-color);
+  background-color: var(--primary-green);
+  padding: 1rem 2.5rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 255, 127, 0.4);
+  max-width: 400px; /* On définit une largeur maximale */
+  width: 100%; /* S'adapte à la largeur disponible dans le conteneur */
+  text-align: center; /* On garde le texte centré au cas où */
+}
+
+
+
+.cta-button:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 30px rgba(0, 255, 127, 0.6);
+
+}
+
+.cta-buttons-container {
+    display: flex; /* Utilise Flexbox pour la mise en page */
+    flex-direction: column; /* Aligne les éléments verticalement */
+    align-items: center; /* Centre les éléments horizontalement */
+    gap: 15px; /* Ajoute un espace entre les boutons */
+    width: 100%;
+}
+
+
+/* --- Sections Générales --- */
+
+.section { 
+
+    padding: 6rem 5%; 
+
+    max-width: 1400px; 
+
+    margin: 0 auto; 
+
+}
+
+.base-section { 
+
+    font-family: var(--font-mono); 
+
+}
+
+.section h2 { 
+
+    font-family: var(--font-mono); 
+
+    font-size: 2.5rem; 
+
+    margin-bottom: 3rem; 
+
+    text-align: center; 
+
+}
+
+
+
+/* --- Grille des Missions --- */
+
+.missions-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+
+    gap: 2rem;
+
+}
+
+
+
+.mission-card {
+
+    background-color: var(--dark-grey);
+
+    border: 1px solid #222;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    transition: all 0.3s ease;
+
+}
+
+.mission-card:hover {
+
+    transform: translateY(-10px) !important;
+
+    box-shadow: 0 20px 40px rgba(56, 56, 56, 0.4);
+
+}
+
+
+
+.mission-header {
+
+    padding: 1.5rem;
+
+    border-bottom: 1px solid #222;
+
+}
+
+.mission-header h3 {
+
+    font-family: var(--font-mono);
+
+    font-size: 1.5rem;
+
+    color: #fff;
+
+    margin: 0; /* Correction de marge pour h3 */
+
+}
+
+/* Couleurs spécifiques par jeu */
+
+.mission-card .game-1 { border-left: 5px solid var(--game-1-color); }
+
+.mission-card .game-2 { border-left: 5px solid var(--game-2-color); }
+
+.mission-card .game-3 { border-left: 5px solid var(--game-3-color); }
+
+
+
+.mission-body {
+
+    padding: 1.5rem;
+
+    flex-grow: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+.mission-body p strong {
+
+    color: var(--text-color);
+
+}
+
+.mission-button {
+
+    font-family: var(--font-mono);
+
+    text-align: center;
+
+    text-decoration: none;
+
+    background-color: #222;
+
+    color: #fff;
+
+    padding: 0.8rem;
+
+    border-radius: 4px;
+
+    margin-top: 1rem;
+
+    transition: background-color 0.3s;
+
+}
+
+.mission-button:hover {
+
+    background-color: #fff;
+
+    color: #000;
+
+}
+
+
+
+/* --- Sections de Détails des Missions --- */
+
+.details-section {
+
+    padding-top: 8rem;
+
+    border-top: 1px solid #222;
+
+    margin-top: 6rem;
+
+}
+
+
+
+.details-section h2 {
+
+    text-align: left;
+
+    margin-bottom: 1rem;
+
+}
+
+
+
+#details-game-1 { border-left: 5px solid var(--game-1-color); }
+
+#details-game-2 { border-left: 5px solid var(--game-2-color); }
+
+#details-game-3 { border-left: 5px solid var(--game-3-color); }
+
+
+
+.details-intro {
+
+    max-width: 800px;
+
+    color: #aaa;
+
+    font-size: 1.1rem;
+
+    margin-bottom: 3rem;
+
+}
+
+
+
+.feature-list {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+    gap: 2rem;
+
+    margin-bottom: 4rem;
+
+}
+
+
+
+.feature-item {
+
+    background: var(--dark-grey);
+
+    padding: 2rem;
+
+    border-left: 3px solid #444;
+
+    transition: border-color 0.3s;
+
+}
+
+
+
+.feature-item:hover {
+
+    border-color: var(--text-color);
+
+}
+
+
+
+.feature-item span {
+
+    font-size: 2.5rem;
+
+    display: block;
+
+    margin-bottom: 1rem;
+
+}
+
+
+
+.feature-item h3 {
+
+    font-family: var(--font-mono);
+
+    color: #fff;
+
+    font-size: 1.3rem;
+
+    margin-bottom: 0.5rem;
+
+}
+
+
+
+.feature-item p {
+
+    color: #aaa;
+
+    margin: 0;
+
+}
+
+
+
+.details-section .cta-button {
+
+    display: block;
+
+    max-width: 400px;
+
+    margin: 2rem auto 0;
+
+    text-align: center;
+
+}
+
+
+
+.button-game-1 {
+
+    background-color: var(--game-1-color);
+
+    box-shadow: 0 0 20px rgba(0, 255, 127, 0.4);
+
+    color: #000;
+
+}
+
+.button-game-1:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 30px rgba(0, 255, 127, 0.6);
+
+}
+
+.button-game-2 {
+
+    background-color: var(--game-2-color);
+
+    box-shadow: 0 0 20px rgba(0, 225, 255, 0.4);
+
+    color: #000;
+
+}
+
+.button-game-2:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 30px rgba(0, 225, 255, 0.6);
+
+}
+
+.button-game-3 {
+
+    background-color: var(--game-3-color);
+
+    box-shadow: 0 0 20px rgba(255, 183, 0, 0.4);
+
+    color: #000;
+
+}
+
+.button-game-3:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 30px rgba(255, 183, 0, 0.6);
+
+}
+
+
+
+.details-head-game-1 { color: var(--game-1-color); }
+
+.details-head-game-2 { color: var(--game-2-color); }
+
+.details-head-game-3 { color: var(--game-3-color); }
+
+
+/* --- Section Crédits --- */
+
+#credits h2 { color: var(--text-color); }
+
+.credits-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem; text-align: center; }
+
+.credit-card { background: var(--dark-grey); border: 1px solid #222; padding: 2rem; border-top: 3px solid var(--game-1-color); }
+
+.credit-card h3 { font-family: var(--font-mono); color: #fff; font-size: 1.2rem; letter-spacing: 1px; margin-bottom: 0.5rem; }
+
+.credit-card p { font-size: 1.5rem; color: var(--text-color); font-weight: bold; margin-bottom: 1rem; }
+
+.credit-card span { font-size: 1rem; color: #aaa; }
+
+
+
+/* --- Footer --- */
+
+.site-footer { background: #000; padding: 3rem 5%; text-align: center; border-top: 1px solid #222; }
+
+.social-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; }
+
+.social-link { position: relative; display: flex; justify-content: center; align-items: center; width: 50px; height: 50px; background-color: var(--dark-grey); border: 1px solid #333; border-radius: 50%; color: #888; text-decoration: none; transition: all 0.3s ease; }
+
+.social-link:hover { color: #fff; border-color: var(--primary-green); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 255, 127, 0.2); }
+
+.social-link i { font-size: 2rem; }
+
+.social-link .tooltip { position: absolute; bottom: 120%; background-color: #fff; color: #000; padding: 0.3rem 0.8rem; border-radius: 4px; font-family: var(--font-sans); font-size: 0.9rem; font-weight: bold; white-space: nowrap; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; }
+
+.social-link:hover .tooltip { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.footer-text { color: #555; font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 1px; }
+
+
+
+
+
+
+
+
+
+/* --- Animation de "Fade-in" --- */
+
+.reveal { 
+
+    opacity: 0; 
+
+    transform: translateY(50px); 
+
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+
+}
+
+.reveal.visible { 
+
+    opacity: 1; 
+
+    transform: translateY(0); 
+
+}
+
+
+/* --- AJOUTS POUR LE DESIGN RESPONSIVE --- */
+/* Le code ci-dessous est à ajouter à la fin de votre fichier promo.css */
+
+/* Pour les tablettes et écrans intermédiaires */
+@media (max-width: 1024px) {
+    .section {
+        /* On réduit le padding vertical et horizontal sur tablette */
+        padding: 4rem 3%;
+    }
+
+    .section h2 {
+        /* On diminue la taille des titres de section */
+        font-size: 2.2rem;
+    }
+
+    .hero-title {
+        /* La fonction clamp gère déjà bien la taille, mais on peut la resserrer si besoin */
+        font-size: clamp(2.5rem, 10vw, 4rem);
+    }
+
+    .details-section {
+        padding-top: 6rem;
+        margin-top: 4rem;
+    }
+}
+
+
+/* Pour les appareils mobiles */
+@media (max-width: 768px) {
+    body {
+        /* Améliore la lisibilité sur mobile en augmentant légèrement l'interligne */
+        line-height: 1.6;
+    }
+
+    .main-header {
+        /* On réduit le padding du header sur mobile */
+        padding: 1rem 3%;
+    }
+    
+    .nav-logo {
+        font-size: 1.2rem;
+    }
+
+    .nav-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .section {
+        /* Le padding doit être beaucoup plus faible sur mobile */
+        padding: 3rem 5%;
+    }
+
+    .section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin: 1rem auto 2rem;
+    }
+    
+    .cta-button {
+        padding: 0.8rem 1.8rem;
+        font-size: 1rem;
+    }
+
+    .missions-grid {
+        /* On passe la largeur minimale des cartes à 300px pour mieux s'adapter aux écrans très fins */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .details-section {
+        padding-top: 4rem;
+        margin-top: 3rem;
+    }
+
+    .details-intro {
+        font-size: 1rem;
+    }
+
+    .feature-list {
+        /* On s'assure que sur mobile la grille est bien sur une colonne */
+        grid-template-columns: 1fr;
+    }
+
+    .credits-container {
+        grid-template-columns: 1fr;
+    }
+
+    .social-link {
+        width: 45px;
+        height: 45px;
+    }
+
+    .social-link i {
+        font-size: 1.5rem;
+    }
+}

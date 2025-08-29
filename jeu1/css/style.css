@@ -1,0 +1,695 @@
+/* --- Variables et Style Global --- */
+:root {
+    --primary-color: #00ff00;
+    --background-color: #0a0a0a;
+    --text-color: #e0e0e0;
+    --dark-grey: #1a1a1a;
+    --medium-grey: #333;
+    --error-color: #ff4141;
+    --font-main: 'Roboto Mono', 'Courier New', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden; /* Empêche le scroll horizontal */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 5px var(--primary-color);
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+input[type="password"],
+input[type="text"] {
+    background-color: var(--dark-grey);
+    border: 1px solid var(--medium-grey);
+    color: var(--text-color);
+    padding: 0.75rem;
+    font-family: var(--font-main);
+    width: 100%;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="password"]:focus,
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px var(--primary-color);
+}
+
+button, .button-link {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-main);
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.pass {
+    margin-top: 10px;
+}
+
+button:hover, .button-link:hover {
+    background-color: var(--text-color);
+    color: var(--background-color);
+}
+
+button:disabled {
+    background-color: var(--medium-grey);
+    cursor: not-allowed;
+}
+
+.error {
+    color: var(--error-color);
+    font-weight: bold;
+    min-height: 24px;
+}
+
+.feedback {
+    color: var(--text-color);
+    margin-top: 1rem;
+    min-height: 24px;
+    font-style: italic;
+}
+
+/* Effet Scanlines en fond pour l'immersion */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(18, 18, 18, 0) 0%, rgba(18, 18, 18, 0.4) 50%, rgba(18, 18, 18, 0) 100%);
+    background-size: 100% 4px;
+    animation: scan 15s linear infinite;
+    z-index: 10;
+}
+
+@keyframes scan {
+    from { background-position: 0 0; }
+    to { background-position: 0 -100vh; }
+}
+
+/* --- Page de Connexion (`index.html`) --- */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin-top: -3px;
+}
+
+.login-box {
+    background-color: var(--dark-grey);
+    padding: 3rem;
+    border: 1px solid var(--medium-grey);
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+    z-index: 1;
+    .description {
+        font-size: 1.1rem;
+    }
+}
+
+.lock-icon {
+    width: 60px;
+    height: 60px;
+    filter: invert(48%) sepia(99%) saturate(1352%) hue-rotate(87deg) brightness(118%) contrast(119%);
+    margin-bottom: 1.5rem;
+}
+
+/* Style de base pour les éléments contenant une lettre cachée */
+.clue {
+    position: relative;
+    color: var(--primary-color);
+    font-weight: bold;
+    cursor: help;
+    text-decoration: underline dotted rgba(0, 255, 0, 0.5);
+    transition: color 0.3s;
+}
+
+/* Le pseudo-élément qui contiendra la lettre révélée */
+.clue::after {
+    content: attr(data-letter); /* Récupère la lettre depuis l'attribut 'data-letter' */
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: var(--background-color);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-shadow: none;
+    line-height: 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+/* L'effet au survol : on rend la bulle visible */
+.clue:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Page de Jeu (`salle-serveur.html`) --- */
+.game-container header {
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.game-header {
+    text-align: center;
+}
+
+#timer {
+    background-color: var(--dark-grey);
+    color: var(--error-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--error-color);
+    margin: 1rem auto;
+    width: fit-content;
+    box-shadow: 0 0 10px var(--error-color);
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+}
+
+.puzzle-box {
+    background-color: var(--dark-grey);
+    border: 1px solid var(--medium-grey);
+    padding: 1.5rem;
+    border-radius: 3px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    h2 {
+    text-align: center;
+    }
+    p {
+    text-align: justify;
+    }
+}
+
+header p {
+        font-size: 1.1rem;
+        margin-top: 0.5rem;
+    }
+
+/* Puzzle Binaire */
+.server-racks {
+    display: flex;
+    gap: 10px;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #000;
+    border-radius: 5px;
+    justify-content: center;
+}
+
+.led {
+    width: 30px;
+    height: 30px;
+    background-color: var(--medium-grey);
+    border-radius: 50%;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.led.on {
+    background-color: var(--primary-color);
+    box-shadow: 0 0 15px var(--primary-color), inset 0 0 5px rgba(255,255,255,0.5);
+    animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.hint {
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+}
+
+/* Puzzle Console */
+.console {
+    background-color: #000;
+    padding: 1rem;
+    border-radius: 3px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+#console-output {
+    white-space: pre-wrap;
+    color: var(--primary-color);
+    flex-grow: 1;
+}
+
+.console-input-line {
+    display: flex;
+    align-items: center;
+}
+
+.console-input-line span {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+}
+
+#console-input {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    padding: 0;
+    margin: 0;
+}
+
+#console-input:focus {
+    box-shadow: none;
+}
+
+.sticky-note {
+    position: absolute;
+    right: 30px;
+    top: 80px;
+    background-color: #fafa90;
+    color: #333;
+    padding: 1rem;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    transform: rotate(8deg);
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+    width: 200px;
+}
+
+.sticky-note p {
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+/* --- Page Pare-feu (`pare-feu.html`) --- */
+#firewall-canvas {
+    background-color: #000;
+    border: 1px solid var(--primary-color);
+    width: 100%;
+    height: auto;
+    cursor: crosshair;
+    border-radius: 3px;
+}
+
+#key-display {
+    word-break: break-all; /* Pour que la clé ne dépasse pas */
+}
+
+.firewall-layout {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Permet de passer en colonne sur petits écrans */
+    gap: 2rem;
+    align-items: stretch;
+}
+
+.firewall-canvas-container {
+    flex: 3;
+    min-height: 500px;
+    background-color: #000;
+    border: 1px solid var(--medium-grey);
+    border-radius: 5px;
+    padding: 0;
+    position: relative;
+}
+
+#firewall-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+}
+
+.firewall-info-panel {
+    flex: 1;
+    min-width: 280px;
+    background-color: var(--dark-grey);
+    padding: 1.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--medium-grey);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-block h3 {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-block p {
+    font-size: 0.9rem;
+    color: #bbb;
+    word-wrap: break-word;
+}
+
+#firewall-feedback {
+    font-weight: bold;
+    font-size: 1rem !important;
+}
+
+#indice-shema {
+    margin-bottom: 1.5rem;
+    li {
+        text-align: left;
+        margin-left: 20px;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* --- Page Noyau Central (noyau.html) --- */
+.core-layout {
+    max-width: 900px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.core-display-box {
+    background-color: #000;
+    border: 1px solid var(--medium-grey);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.core-display-box label {
+    display: block;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+#purge-command-display {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: 0 0 8px var(--primary-color);
+    white-space: pre-wrap;
+    word-break: break-all;
+    line-height: 1.4;
+    min-height: 100px;
+}
+
+.glitch-char {
+    color: var(--error-color);
+    text-shadow: 0 0 8px var(--error-color);
+    animation: text-flicker 0.1s infinite;
+}
+
+@keyframes text-flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.core-input-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--medium-grey);
+    padding: 0.5rem;
+    background-color: var(--dark-grey);
+}
+
+.core-input-box > span {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 0 1rem;
+}
+
+.core-input-box #command-input {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    margin: 0;
+    font-size: 1.2rem;
+    padding: 0.5rem 0;
+    box-shadow: none !important;
+    transition: none;
+}
+
+.core-input-box #command-input:focus {
+    outline: none;
+}
+
+/* Classes pour la validation en temps réel */
+.input-correct {
+    border: 2px solid var(--primary-color) !important;
+}
+.input-error {
+    border: 2px solid var(--error-color) !important;
+}
+
+#core-timer {
+    background-color: var(--dark-grey);
+    color: var(--error-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--error-color);
+    margin: 1rem auto;
+    width: fit-content;
+    box-shadow: 0 0 10px var(--error-color);
+}
+
+/* --- Pages de Fin (`victoire.html` & `echec.html`) --- */
+.victory-container {
+    text-align: center;
+    padding-top: 5rem;
+}
+
+.victory-container h1 {
+    font-size: 3rem;
+    text-shadow: 0 0 15px var(--primary-color);
+    text-transform: uppercase;
+}
+
+.victory-container p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.victory-container .button-link {
+    margin-top: 2rem;
+}
+
+.failure-title {
+    color: var(--error-color);
+    text-shadow: 0 0 10px var(--error-color);
+}
+
+
+/* --- AJOUTS POUR LE DESIGN RESPONSIVE DU JEU (Version Corrigée) --- */
+
+/* Correction pour le canvas du pare-feu (s'applique à toutes les tailles) */
+#firewall-canvas {
+    height: 100%; /* La correction cruciale : remplace height: auto; */
+}
+
+
+/* Pour les tablettes et écrans intermédiaires */
+@media (max-width: 1024px) {
+    .container {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .main-content {
+        gap: 2rem;
+    }
+
+    .firewall-layout {
+        gap: 1.5rem;
+    }
+}
+
+
+/* Pour les appareils mobiles */
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem auto;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    /* Page de connexion */
+    .login-box {
+        padding: 2rem 1.5rem;
+    }
+
+    /* Salle des serveurs - NOUVELLES CORRECTIONS */
+    .puzzle-box {
+        padding: 0.9rem; /* Padding réduit */
+        width: 89%;
+    }
+
+    .puzzle-box p {
+        font-size: 0.8rem; /* Texte plus petit */
+    }
+
+    .server-racks {
+        gap: 5px; /* Espacement des LEDs réduit */
+        padding: 0.5rem;
+    }
+
+    .led {
+        width: 20px; /* Taille des LEDs réduite */
+        height: 20px;
+    }
+    
+    .sticky-note {
+        position: relative;
+        top: 0;
+        right: 0;
+        transform: rotate(0);
+        margin: 1.5rem auto 0;
+        width: 90%;
+    }
+
+    /* Page du pare-feu */
+    .puzzle-box-firewall {
+        width: 100%;
+    }
+
+    .firewall-layout {
+        flex-direction: column;
+    }
+
+    .firewall-info-panel {
+        width: 100%;
+        min-width: unset;
+        order: 2; /* Place le panneau d'info en dessous du canvas */
+    }
+
+    .firewall-canvas-container {
+        order: 1; /* Place le canvas en premier */
+        min-height: 300px; /* Hauteur minimale pour le canvas */
+    }
+
+    .firewall-canvas-container {
+        min-height: 350px;
+    }
+
+    /* Page du noyau */
+    #purge-command-display {
+        font-size: 1rem;
+        min-height: 80px;
+    }
+
+    .core-input-box #command-input {
+        font-size: 1rem;
+    }
+    
+    .core-input-box > span {
+        font-size: 1.2rem;
+        margin: 0 0.5rem;
+    }
+
+    /* Pages de fin (victoire/échec) */
+    .victory-container {
+        padding-top: 2rem;
+    }
+
+    .victory-container h1 {
+        font-size: 2rem;
+    }
+
+    .victory-container p {
+        font-size: 1rem;
+    }
+}
+
+
+/* Ajoute ceci à la fin de ton fichier style.css */
+#global-timer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--dark-grey);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    z-index: 1000; /* Pour s'assurer qu'il est au-dessus de tout */
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Ajustement pour mobile */
+@media (max-width: 768px) {
+    #global-timer {
+        font-size: 0.9rem;
+        top: 10px;
+        right: 10px;
+        padding: 0.4rem 0.8rem;
+    }
+}

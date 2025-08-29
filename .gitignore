@@ -1,0 +1,14 @@
+/.well-known/*
+/cgi-bin/*
+.htaccess
+*.shtml
+*.php
+composer.lock
+composer.json
+/vendor/*
+/umbra-games-update-mail/*
+/connexion/*
+!/assets
+/assets/*
+!/assets/banner.gif
+!/assets/capture_hub.gif

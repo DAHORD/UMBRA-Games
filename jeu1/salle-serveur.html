@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UMBRA Game - Salle des Serveurs</title>
+
+    <link rel="icon" href="../assets/img/logo.png" type="image/png">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+
+
+    <div class="scanlines"></div>
+
+
+
+    <div class="container game-container">
+
+        <header class="game-header">
+
+            <h1>Salle des Serveurs - Unité 734</h1>
+
+            <div id="timer">Temps restant : 05:00</div>
+
+        </header>
+
+
+
+        <main class="main-content">
+
+            <div class="puzzle-box" id="binary-puzzle">
+
+                <h2>Baie de serveurs Alpha</h2>
+
+                <p>Un des racks semble avoir un schéma de LED inhabituel. Peut-être une valeur numérique ?</p>
+
+                <div class="server-racks">
+
+                    <div class="led"></div><div class="led"></div><div class="led on"></div><div class="led"></div><div class="led on"></div><div class="led"></div><div class="led on"></div><div class="led"></div>
+
+                </div>
+
+                <p class="hint">Indice N°1 : Pensez au Binaire... Avec 0 et 1 (off et on)</p>
+                <p class="hint">Indice N°2 : 128|64|32|16|8|4|2|1</p>
+
+            </div>
+
+
+
+            <div class="puzzle-box" id="console-puzzle">
+
+                <h2>Terminal de Maintenance</h2>
+
+                <p>Utilisez la console pour <br> interroger le système.</p>
+
+                <div class="console"><pre id="console-output">> Entrez une commande...</pre><div class="console-input-line"><span>$</span><input type="text" id="console-input" placeholder="..."></div></div>
+
+                <div class="sticky-note"><p>Notes : <br><strong>help</strong> / <strong>scan_network</strong></p></div>
+
+            </div>
+
+
+
+            <div class="puzzle-box" id="document-puzzle">
+                <h2>Documents de l'Ingénieur</h2>
+                <p>Un document technique a été laissé sur un bureau. Consultez-le pour générer une clé de session unique.</p>
+                <button id="read-doc">Générer la Clé de Session</button>
+
+                <div id="access-key-container" style="display: none; margin-top: 1rem;">
+                    <input type="text" id="access-key-display" readonly style="background-color: #000; text-align: center;">
+                </div>
+
+                <p id="doc-feedback" class="feedback pass"></p>
+            </div>
+
+
+
+            <div class="puzzle-box" id="final-puzzle">
+
+                <h2>Accès au Panneau du Pare-feu</h2>
+
+                <p>Entrez le code d'accès au module du pare-feu. Il est composé de la valeur numérique des serveurs et du mot-clé de la console (ex: 00-MOTCLE).</p>
+
+                <form id="final-form">
+
+                    <input type="text" id="final-code" placeholder="CODE-ACCÈS...">
+
+                    <button type="submit">ACCÉDER AU PARE-FEU</button>
+
+                </form>
+
+                <p id="final-error-message" class="error pass"></p>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+
+    <script src="js/game.js"></script>
+    <script src="js/timer.js"></script>
+
+</body>
+
+</html>

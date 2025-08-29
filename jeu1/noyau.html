@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UMBRA Game - Noyau Central</title>
+
+    <link rel="icon" href="../assets/img/logo.png" type="image/png">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+
+
+    <div class="scanlines"></div>
+
+    
+
+    <div class="container game-container">
+
+        <header>
+
+            <h1>Noyau Central - Protocole de Purge</h1>
+
+            <p>Le système se défend ! La commande de purge se corrompt. 
+            <br> Entrez la commande originale avant qu'il ne soit trop tard.</p>
+
+            <div id="core-timer"></div>
+
+        </header>
+
+
+
+        <main class="core-layout">
+
+            <div class="core-display-box">
+
+                <label for="command-input">Commande système requise :</label>
+
+                <pre id="purge-command-display"></pre>
+
+            </div>
+
+
+
+            <form id="purge-form" class="core-input-box">
+
+                <span>></span>
+
+                <input type="text" id="command-input" autocomplete="off" spellcheck="false" placeholder="Retaper la commande ici...">
+
+                <button type="submit">EXÉCUTER</button>
+
+            </form>
+
+            
+
+            <p id="core-error" class="error"></p>
+
+        </main>
+
+    </div>
+
+    <script src="js/noyau.js"></script>
+    <script src="js/timer.js"></script>
+
+</body>
+
+</html>

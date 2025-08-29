@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UMBRA Game - Module Pare-feu</title>
+
+    <link rel="icon" href="../assets/img/logo.png" type="image/png">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .zoom-toggle-button {
+            overflow: hidden;
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            /* Styles spécifiques au module Pare-feu */
+
+        .firewall-layout {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .firewall-canvas-container {
+            position: relative;
+            flex: 2;
+        }
+
+        #firewall-canvas {
+            border: 2px solid #00ff00;
+            background-color: #000;
+            width: 100%;
+            height: 400px;
+        }
+
+        .zoom-toggle-button {
+            position: absolute;
+            display: flex !important;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: #00ff00;
+            color: #000;
+            border: none;
+            cursor: pointer;
+        }
+
+        .firewall-info-panel {
+            flex: 1;
+            background-color: #111;
+            padding: 15px;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+        }
+
+        .info-block {
+            margin-bottom: 15px;
+        }
+
+        .info-block h3 {
+            margin-bottom: 5px;
+        }
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <div class="scanlines"></div>
+
+    
+
+    <div class="container game-container">
+
+
+
+        <header>
+
+            <h1>Module du Pare-feu</h1>
+
+            <p>Le système est protégé par un réseau neuronal. <br> 
+                Créez un chemin de bypass en activant les bons nœuds dans l'ordre séquentiel.</p>
+
+        </header>
+
+
+
+        <div class="puzzle-box puzzle-box-firewall" id="indice-shema">
+
+                <h2>Indices de la Séquence du Bypass</h2>
+
+                <ol>
+
+                    <li>Je suis un cercle mais avec un côté</li>
+
+                    <li>Dans l'ordre je suis premier mais dans le shéma je suis dernier</li>
+
+                    <li>Le chiffre des centaines du calcul suivant est mon numéro : (490/2*5)/2</li>
+
+                    <li>J'ai 2 types d'accents sur cette page</li>
+
+                    <li>Je suis présent 7 fois sur cette ligne, 50 fois sur la page</p></li>
+
+                </ol>
+
+            </div>
+
+
+
+        <div class="firewall-layout">
+
+            <div class="firewall-canvas-container">
+
+                <canvas id="firewall-canvas"></canvas>
+                <button class="zoom-toggle-button">Zoom</button>
+
+            </div>
+
+
+
+            <div class="firewall-info-panel">
+
+                <h2>Centre de Contrôle</h2>
+
+                <div class="info-block">
+
+                    <h3>Clé de Session</h3>
+
+                    <p id="key-display">Analyse...</p>
+
+                </div>
+
+                <div class="info-block">
+
+                    <h3>Statut du Bypass</h3>
+
+                    <p id="firewall-feedback">En attente de la séquence...</p>
+
+                </div>
+
+                <div class="info-block">
+
+                    <h3>Instructions</h3>
+
+                    <p>Les journaux de l'ingénieur mentionnent un "chemin du serpent" pour le bypass, contenant 5 nœuds, du nœud d'entrée au nœud de sortie.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/firewall.js"></script>
+    <script src="js/timer.js"></script>
+
+</body>
+
+</html>
