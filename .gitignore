@@ -5,6 +5,9 @@
 *.php
 composer.lock
 composer.json
+googlefcef4c1cff7a966e.html
+robots.txt
+sitemap.xml
 /vendor/*
 /umbra-games-update-mail/*
 /connexion/*
