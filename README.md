@@ -1,6 +1,6 @@
 # 🕵️‍♂️ UMBRA-Games
 
-![UMBRA-Games Banner](./assets/banner.gif)
+![UMBRA-Games Banner](./assets/banner.png)
 
 > _Plongez dans une aventure cyber captivante, où hacking, énigmes et suspense s’entremêlent…_
 

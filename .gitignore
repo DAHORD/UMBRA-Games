@@ -13,5 +13,5 @@ sitemap.xml
 /connexion/*
 !/assets
 /assets/*
-!/assets/banner.gif
+!/assets/banner.png
 !/assets/capture_hub.gif
